@@ -41,9 +41,9 @@ $ terraform apply -target=module.dgraph
 
 > Note: Both the modules cannot be applied at the same time owing to the way Terraform [evaluates](https://www.terraform.io/docs/providers/kubernetes/index.html#stacking-with-managed-kubernetes-cluster-resources) the provider blocks
 
-The output of `terraform apply` will contain the hostnames of the Load Balancers exposing the Alpha, Zero and Ratel services. 
+The output of `terraform apply -target=module.dgraph` will contain the hostnames of the Load Balancers exposing the Alpha, Zero and Ratel services. 
 
-5. Use `terraform destroy` to delete the setup and restore the previous state.
+5. Use `terraform destroy -target=module.aws` to delete the setup and restore the previous state.
 
 
 
