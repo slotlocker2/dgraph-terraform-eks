@@ -24,7 +24,7 @@ zero_persistence     = true
 zero_storage_size_gb = 10
 
 # Alpha
-alpha_initialize_data = true
+alpha_initialize_data = false
 alpha_replicas        = 3
 alpha_persistence     = true
 alpha_storage_size_gb = 10
