@@ -28,13 +28,13 @@ variable "ha" {
 variable "only_whitelist_local_ip" {
   type        = bool
   default     = true
-  description = "Only whitelist the IP of the executioner at the Ingress Load Balancers"
+  description = "Only whitelist the IP of the executioner at the service Load Balancers"
 }
 
 variable "ingress_whitelist_cidrs" {
   type        = list
   default     = ["0.0.0.0/0"]
-  description = "The CIDRs whitelisted at the Ingress Load Balancer"
+  description = "The CIDRs whitelisted at the service Load Balancer"
 }
 
 variable "worker_nodes_count" {

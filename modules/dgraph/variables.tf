@@ -18,7 +18,7 @@ variable "ha" {
 variable "ingress_whitelist_cidrs" {
   type        = list
   default     = ["0.0.0.0/0"]
-  description = "The CIDRs whitelisted at the ingress Load Balancer"
+  description = "The CIDRs whitelisted at the service load balancer"
 }
 
 variable "namespace" {

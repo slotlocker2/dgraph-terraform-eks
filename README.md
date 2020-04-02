@@ -55,8 +55,8 @@ The following table lists the configurable parameters of the template and their 
 | `cidr`                    | The CIDR of the VPC                                          | 10.20.0.0/16  |
 | `region`                  | The region to deploy the resources in                        | ap-south-1    |
 | `ha`                      | Enable or disable HA deployment of Dgraph                    | true          |
-| `ingress_whitelist_cidrs` | The CIDRs whitelisted at the Ingress Load Balancer | ["0.0.0.0/0"] |
-| `only_whitelist_local_ip` | "Only whitelist the IP of the executioner at the Ingress Load Balancers | true          |
+| `ingress_whitelist_cidrs` | The CIDRs whitelisted at the service Load Balancer | ["0.0.0.0/0"] |
+| `only_whitelist_local_ip` | "Only whitelist the IP of the executioner at the service Load Balancers | true          |
 | `worker_nodes_count`      | The number of worker nodes to provision with the EKS cluster | 3             |
 | `instance_types`		          | The list of instance types to run as worker nodes | ["m5.large"] |
 | `namespace`               | The namespace to deploy the Dgraph pods to                   | dgraph        |
