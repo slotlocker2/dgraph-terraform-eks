@@ -7,11 +7,11 @@ optimize for query performance and throughput, reducing disk seeks and network c
 
 ### Introduction
 
-The Terraform template creates the following resources towards setting up a Dgraph cluster on AWS EKS
+The Terraform template creates the following resources towards setting up a Dgraph cluster on AWS EKS.
 
-- AWS VPC with 2 private subnets for hosting the EKS cluster, 2 public subnets to host the load balancers to expose the services and one NAT subnet to provision the NAT gateway required for the nodes/pods in the private subnet to communicate with the internet. Also, sets up the NACL rules for secure inter subnet communication
-- AWS EKS in the private subnets to host the Dgraph cluster
-- The Dgraph cluster Kubernetes resources in either a standalone mode or a HA mode(refer to the variables available to tweak the provisioning of the Dgraph cluster below)
+- AWS VPC with 2 private subnets for hosting the EKS cluster, 2 public subnets to host the load balancers to expose the services and one NAT subnet to provision the NAT gateway required for the nodes/pods in the private subnet to communicate with the internet. Also sets up the NACL rules for secure inter subnet communication.
+- AWS EKS in the private subnets to host the Dgraph cluster.
+- The Dgraph cluster Kubernetes resources in either a standalone mode or a HA mode(refer to the variables available to tweak the provisioning of the Dgraph cluster below) on the EKS cluster.
 
 ### Prerequisites
 
@@ -20,9 +20,9 @@ The Terraform template creates the following resources towards setting up a Dgra
 
 ## Steps to follow to get the Dgraph cluster on AWS EKS up and running:
 
-1. You must have an AWS account with privileges to create VPC, EKS and associated resources. awscli setup with the right credentials. (One can also use AWS_PROFILE=profilename terraform \<command\> alternatively )
+1. You must have an AWS account with privileges to create VPC, EKS and associated resources. Ensure awscli setup with the right credentials (One can also use AWS_PROFILE=\<profilename\> terraform \<command\> alternatively).
 
-2. [Download](https://terraform.io/downloads.html) and install terraform.
+2. [Download](https://terraform.io/downloads.html) and install Terraform.
 
 3. Create a `terraform.tfvars` file similar to that of `terraform.tfvars.example` and edit the variables inside accordingly.
    You can override any variable present in [variables.tf](./variables.tf) by providing an explicit value in `terraform.tfvars` file.
@@ -39,15 +39,15 @@ $ terraform plan -target=module.dgraph
 $ terraform apply -target=module.dgraph
 ```
 
-> Note: Both the modules cannot be applied at the same time owing to the way Terraform [evaluates](https://www.terraform.io/docs/providers/kubernetes/index.html#stacking-with-managed-kubernetes-cluster-resources) the provider blocks
+> Note: Both the modules cannot be applied in the same run owing to the way Terraform [evaluates](https://www.terraform.io/docs/providers/kubernetes/index.html#stacking-with-managed-kubernetes-cluster-resources) the provider blocks.
 
-The output of `terraform apply -target=module.dgraph` will contain the hostnames of the Load Balancers exposing the Alpha, Zero and Ratel services. 
+The command `terraform apply -target=module.dgraph` would output the hostnames of the Load Balancers exposing the Alpha, Zero and Ratel services. 
 
 5. Use `terraform destroy -target=module.aws` to delete the setup and restore the previous state.
 
 
 
-The following table lists the configurable parameters of the template and their default values.
+The following table lists the configurable parameters of the template and their default values:
 
 | Parameter                 | Description                                                  | Default       |
 | ------------------------- | ------------------------------------------------------------ | ------------- |
@@ -72,13 +72,13 @@ The following table lists the configurable parameters of the template and their 
 
 > NOTE: 
 >
-> 1. If `ha` is set to `false` the `worker_node_count` is overridden to `1`
+> 1. If `ha` is set to `false` the `worker_node_count` is overridden to `1`.
 >
-> 2. If `only_whitelist_local_ip` is set to`true`, the `ingress_whitelist_cidrs is overridden` to local IP of the executioner
+> 2. If `only_whitelist_local_ip` is set to`true`, the `ingress_whitelist_cidrs is overridden` to local IP of the executioner.
 >
-> 3. The `kubeconfig` file is created in the root directory of this repository
+> 3. The `kubeconfig` file is created in the root directory of this repository.
 >
-> 4. One could use Helm to install the Kubernetes resources onto the cluster, in which case comment out the `dgraph` module in `main.tf`
+> 4. One could use Helm to install the Kubernetes resources onto the cluster, in which case comment out the `dgraph` module in `main.tf`.
 >
 > 5. The number of `worker_nodes` needs to be more than the greater of replicas of Zero/Alpha when `ha` is enabled to ensure the topological scheduling based on hostnames works.
 > 
