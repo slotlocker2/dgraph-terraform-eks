@@ -78,7 +78,7 @@ resource "kubernetes_config_map" "dgraph_zero_command" {
   }
 
   data = {
-    "dgraph_zero.sh" = templatefile("${path.module}/templates/zero.tpl", { prefix = var.prefix, namespace = var.namespace, replicas = local.zero_replicas })
+    "dgraph_zero.sh" = var.ha ? templatefile("${path.module}/templates/zero-ha.tpl", { prefix = var.prefix, namespace = var.namespace, replicas = local.zero_replicas }) : templatefile("${path.module}/templates/zero.tpl", {})
   }
 
   depends_on = [var.namespace_resource]
