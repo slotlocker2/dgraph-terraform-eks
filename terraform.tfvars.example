@@ -28,4 +28,4 @@ alpha_initialize_data = false
 alpha_replicas        = 3
 alpha_persistence     = true
 alpha_storage_size_gb = 10
-alpha_lru_size_mb     = 1025
+alpha_lru_size_mb     = 2048
